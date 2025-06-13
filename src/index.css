@@ -9,41 +9,56 @@ body {
   color: #D9D9D9;
   padding: 20px;
   height: 100vh;
+}
+
+main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
   text-align: center;
 }
 
-header>h1 {
+header > h1 {
   font-size: 1.25rem;
   font-weight: 500;
   color: #F9F4DA;
 }
 
-header>p {
+header > p {
   font-size: 0.875rem;
   max-width: 350px;
   color: #8E8E8E;
 }
 
 section.game-status {
-  background-color: #10A95B;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #F9F4DA;
+  width: 100%;
+  max-width: 350px;
+  min-height: 60px;
   border-radius: 4px;
   margin-block: 30px;
+
 }
 
-section.game-status>p {
+section.game-status.won {
+  background-color: #10A95B;
+}
+
+section.game-status.lost {
+  background-color: #BA2A2A;
+}
+
+section.game-status > p {
   margin: 5px;
 }
 
-section.game-status>h2 {
+section.game-status > h2 {
   font-size: 1.25rem;
   margin: 5px
 }
@@ -85,7 +100,7 @@ section.word {
   margin-bottom: 20px;
 }
 
-section.word>span {
+section.word > span {
   height: 40px;
   width: 40px;
   background-color: #323232;
@@ -105,7 +120,7 @@ section.keyboard {
   margin-bottom: 36px;
 }
 
-section.keyboard>button {
+section.keyboard > button {
   height: 35px;
   width: 35px;
   background-color: #FCBA29;
@@ -114,11 +129,11 @@ section.keyboard>button {
   cursor: pointer;
 }
 
-section.keyboard>button.correct {
+section.keyboard > button.correct {
   background-color: #10A95B;
 }
 
-section.keyboard>button.wrong {
+section.keyboard > button.wrong {
   background-color: #EC5D49;
 }
 

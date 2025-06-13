@@ -9,9 +9,9 @@ export default function AssemblyEndgame() {
 
   // Derived values
   const wrongGuessCount =
-    guessedLetters.filter(letter => !currentWord.includes(letter)).length
+      guessedLetters.filter(letter => !currentWord.includes(letter)).length
   const isGameWon =
-    currentWord.split("").every(letter => guessedLetters.includes(letter))
+      currentWord.split("").every(letter => guessedLetters.includes(letter))
   const isGameLost = wrongGuessCount >= languages.length - 1
   const isGameOver = isGameWon || isGameLost
 
@@ -20,9 +20,9 @@ export default function AssemblyEndgame() {
 
   function addGuessedLetter(letter) {
     setGuessedLetters(prevLetters =>
-      prevLetters.includes(letter) ?
-        prevLetters :
-        [...prevLetters, letter]
+        prevLetters.includes(letter) ?
+            prevLetters :
+            [...prevLetters, letter]
     )
   }
 
@@ -34,20 +34,20 @@ export default function AssemblyEndgame() {
     }
     const className = clsx("chip", isLanguageLost && "lost")
     return (
-      <span
-        className={className}
-        style={styles}
-        key={lang.name}
-      >
-        {lang.name}
-      </span>
+        <span
+            className={className}
+            style={styles}
+            key={lang.name}
+        >
+                {lang.name}
+            </span>
     )
   })
 
   const letterElements = currentWord.split("").map((letter, index) => (
-    <span key={index}>
-      {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
-    </span>
+      <span key={index}>
+            {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+        </span>
   ))
 
   const keyboardElements = alphabet.split("").map(letter => {
@@ -60,37 +60,61 @@ export default function AssemblyEndgame() {
     })
 
     return (
-      <button
-        className={className}
-        key={letter}
-        onClick={() => addGuessedLetter(letter)}
-      >
-        {letter.toUpperCase()}
-      </button>
+        <button
+            className={className}
+            key={letter}
+            onClick={() => addGuessedLetter(letter)}
+        >
+          {letter.toUpperCase()}
+        </button>
     )
   })
 
+  const gameStatusClass = clsx("game-status", {
+    won: isGameWon,
+    lost: isGameLost
+  })
+
   return (
-    <main>
-      <header>
-        <h1>Assembly: Endgame</h1>
-        <p>Guess the word within 8 attempts to keep the
-          programming world safe from Assembly!</p>
-      </header>
-      <section className="game-status">
-        <h2>You win!</h2>
-        <p>Well done! 🎉</p>
-      </section>
-      <section className="language-chips">
-        {languageElements}
-      </section>
-      <section className="word">
-        {letterElements}
-      </section>
-      <section className="keyboard">
-        {keyboardElements}
-      </section>
-      {isGameOver && <button className="new-game">New Game</button>}
-    </main>
+      <main>
+        <header>
+          <h1>Assembly: Endgame</h1>
+          <p>Guess the word within 8 attempts to keep the
+            programming world safe from Assembly!</p>
+        </header>
+
+        <section className={gameStatusClass}>
+          {isGameOver ? (
+              isGameWon ? (
+                  <>
+                    <h2>You win!</h2>
+                    <p>Well done! 🎉</p>
+                  </>
+              ) : (
+                  <>
+                    <h2>Game over!</h2>
+                    <p>You lose! Better start learning Assembly 😭</p>
+                  </>
+              )
+          ) : (
+              null
+          )
+          }
+        </section>
+
+        <section className="language-chips">
+          {languageElements}
+        </section>
+
+        <section className="word">
+          {letterElements}
+        </section>
+
+        <section className="keyboard">
+          {keyboardElements}
+        </section>
+
+        {isGameOver && <button className="new-game">New Game</button>}
+      </main>
   )
 }
